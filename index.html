@@ -89,21 +89,31 @@ h1 {
         A simple palm tree. A symbol of freedom, escape, and warmth.<br><br>
         It’s not a flashy piece of jewelry. Lightweight. Elegant. Perfect for summer.
     </div>
-
-    <!-- CALL TO ACTION -->
-    <a href="https://www.amazon.com/dp/B0GF2SWBYR" class="cta-btn"
-   target="_blank"
-   onclick="sendPostback(17);">View on Amazon</a>
-</div>
-<!-- PopAds Script + ImpressionID -->
 <script type="text/javascript" src="https://c1.popads.net/pop.js"></script>
-<script type="text/javascript">
-    var popadsImpressionId = "[IMPRESSIONID]"; // PopAds remplace ce placeholder si S2S activé
+<script>
+function getParameterByName(name) {
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(window.location.href);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+var popadsImpressionId = getParameterByName("impressionid"); // note: minuscules, doit correspondre à ton URL
 </script>
-    <script>
+<button id="amazonBtn">See Amazon Details</button>
+<script>
+document.getElementById("amazonBtn").addEventListener("click", function() {
+    sendPostback(11);
+    window.open("https://www.amazon.com/dp/B0GF2SWBYR", "_blank");
+});
+</script>
+</div>
+<script>
 function sendPostback(conversionValue) {
     if(!popadsImpressionId) return; // sécurité
-    var url = "http://serve.popads.net/cpixel.php?s2s=1&aid=268fa93074a262ac23c34e4692558bc3&id=" + popadsImpressionId + "&value=" + conversionValue;
+    var url = "https://serve.popads.net/cpixel.php?s2s=0&aid=268fa93074a262ac23c34e4692558bc3&id=" + popadsImpressionId + "&value=" + conversionValue;
     
     var img = new Image();
     img.src = url;
