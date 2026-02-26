@@ -101,7 +101,15 @@ h1 {
         It’s not a flashy piece of jewelry. Lightweight. Elegant. Perfect for summer.
     </div>
 <a href="https://www.amazon.com/dp/B0GF2SWBYR" class="cta-btn" id="amazonBtn" target="_blank">View on Amazon</a>
-
+<script>
+document.getElementById("amazonBtn").addEventListener("click", function() {
+    gtag('event', 'click', {
+        'event_category': 'CTA',
+        'event_label': 'View on Amazon',
+        'value': 17 // valeur de conversion USD
+    });
+});
+</script>
 <script>
 // Récupérer impressionId depuis l'URL
 function getParameterByName(name) {
