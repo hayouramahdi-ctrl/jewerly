@@ -91,20 +91,23 @@ h1 {
     </div>
 
     <!-- CALL TO ACTION -->
-    <a href="https://www.amazon.com/dp/B0GF2SWBYR" class="cta-btn" target="_blank">View on Amazon</a>
+    <a href="https://www.amazon.com/dp/B0GF2SWBYR" class="cta-btn"
+   target="_blank"
+   onclick="sendPostback(17);">View on Amazon</a>
 </div>
-
-<!-- ------------------------- TRACKING SCRIPTS ------------------------- -->
-<!-- Google Analytics / PopAds Tracking -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-XXXXXXX');
-</script>
-
+<!-- PopAds Script + ImpressionID -->
 <script type="text/javascript" src="https://c1.popads.net/pop.js"></script>
-<!-- Replace YOURPRODUCTID and G-XXXXXXX with your IDs -->
+<script type="text/javascript">
+    var popadsImpressionId = "[IMPRESSIONID]"; // PopAds remplace ce placeholder si S2S activé
+</script>
+    <script>
+function sendPostback(conversionValue) {
+    if(!popadsImpressionId) return; // sécurité
+    var url = "http://serve.popads.net/cpixel.php?s2s=1&aid=268fa93074a262ac23c34e4692558bc3&id=" + popadsImpressionId + "&value=" + conversionValue;
+    
+    var img = new Image();
+    img.src = url;
+}
+</script>
 </body>
 </html>
