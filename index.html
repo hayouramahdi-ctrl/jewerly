@@ -89,8 +89,10 @@ h1 {
         A simple palm tree. A symbol of freedom, escape, and warmth.<br><br>
         It’s not a flashy piece of jewelry. Lightweight. Elegant. Perfect for summer.
     </div>
-<script type="text/javascript" src="https://c1.popads.net/pop.js"></script>
+<a href="https://www.amazon.com/dp/B0GF2SWBYR" id="amazonBtn" class="cta-btn" target="_blank">View on Amazon</a>
+
 <script>
+// Récupérer impressionId depuis l'URL
 function getParameterByName(name) {
     name = name.replace(/[\[\]]/g, "\\$&");
     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
@@ -100,24 +102,22 @@ function getParameterByName(name) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-var popadsImpressionId = getParameterByName("impressionid"); // note: minuscules, doit correspondre à ton URL
-</script>
-<button id="amazonBtn">See Amazon Details</button>
-<script>
-document.getElementById("amazonBtn").addEventListener("click", function() {
-    sendPostback(11);
-    window.open("https://www.amazon.com/dp/B0GF2SWBYR", "_blank");
-});
-</script>
-</div>
-<script>
+var popadsImpressionId = getParameterByName("impressionid") || "TEST123"; // fallback pour test local
+
+// Fonction Postback PopAds
 function sendPostback(conversionValue) {
-    if(!popadsImpressionId) return; // sécurité
-    var url = "https://serve.popads.net/cpixel.php?s2s=0&aid=268fa93074a262ac23c34e4692558bc3&id=" + popadsImpressionId + "&value=" + conversionValue;
-    
+    if(!popadsImpressionId) return;
+    var url = "https://serve.popads.net/cpixel.php?s2s=0&aid=268fa93074a262ac23c34e4692558bc3&id=" 
+              + popadsImpressionId + "&value=" + conversionValue;
     var img = new Image();
     img.src = url;
 }
+
+// Ajouter l'événement au clic du bouton
+document.getElementById("amazonBtn").addEventListener("click", function() {
+    sendPostback(17);
+});
 </script>
+
 </body>
 </html>
